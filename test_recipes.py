@@ -12,7 +12,5 @@ def test_user_2_gets_safe_recipes(conn):
     assert names == ["Peanut chutney sandwich","Poha"]
 
 def test_unknown_user_gets_no_recipes(conn):
-    result = safe_recipes(conn, 999)
-    names = sorted(name for _id, name in result)
-    assert names == []
+    assert safe_recipes(conn, 999) == []
 
