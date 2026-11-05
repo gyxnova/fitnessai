@@ -6,6 +6,10 @@ from dotenv import load_dotenv
 REPO_ROOT = Path(__file__).resolve().parent
 load_dotenv(REPO_ROOT / ".env")
 SCHEMA_PATH = REPO_ROOT / "schema.sql"
+SEED_EXERCISES_PATH = REPO_ROOT / "seed_exercises.sql"
+SEED_PATH_1 = REPO_ROOT / "seed.sql"
+SEED_PATH_2 = REPO_ROOT / "seed2.sql"
+SEED_PATH_3 = REPO_ROOT / "seed3.sql"
 
 
 DB_HOST = os.getenv("DB_HOST")
