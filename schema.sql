@@ -62,7 +62,12 @@ CREATE TABLE exercise_equipment (
     equipment    TEXT NOT NULL,
     PRIMARY KEY (exercise_id, equipment)
 );
-
+CREATE TABLE exercise_areas (
+    exercise_id  INTEGER NOT NULL REFERENCES exercises (exercise_id) ON DELETE CASCADE,
+    area         TEXT NOT NULL
+        CHECK (area IN ('legs', 'chest', 'back', 'shoulders', 'arms', 'core')),
+    PRIMARY KEY (exercise_id, area)
+);
 CREATE TABLE workout_sessions (
     session_id    INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id       INTEGER NOT NULL REFERENCES users (user_id) ON DELETE CASCADE,
