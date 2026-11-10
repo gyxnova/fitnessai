@@ -11,7 +11,9 @@ SEED_PATH_2 = REPO_ROOT / "seed2.sql"
 SEED_EXERCISES_PATH = REPO_ROOT / "seed_exercises.sql"
 SEED_AREAS_PATH = REPO_ROOT / "seed_areas.sql"
 SEED_EXERCISES2_PATH = REPO_ROOT / "seed_exercises2.sql"
+SEED_EXERCISES3_PATH = REPO_ROOT / "seed_exercises3.sql"
 SEED_PATH_3 = REPO_ROOT / "seed3.sql"
+SEED_PATH_4 = REPO_ROOT / "seed4.sql"
 
 
 DB_HOST = os.getenv("DB_HOST")

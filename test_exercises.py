@@ -3,7 +3,7 @@ from exercises import safe_exercises
 def test_user_1_gets_safe_exercises(conn):
     result = safe_exercises(conn, 1)
     names = sorted(name for _id, name in result)
-    assert names == [ "Jumping jacks", "Reverse snow angels","Squats"] #"Burpees" is never in user 1’s results 
+    assert names == [ "Jumping jacks", "Reverse snow angels","Squats","Step-ups"] #"Burpees" is never in user 1’s results 
 
 def test_user_2_gets_safe_exercises(conn):
     result = safe_exercises(conn, 2)
@@ -13,7 +13,12 @@ def test_user_2_gets_safe_exercises(conn):
 def test_user_3_gets_safe_exercises(conn):
     result = safe_exercises(conn, 3)
     names = sorted(name for _id, name in result)
-    assert names == ["Jumping jacks", "Reverse snow angels", "Wall push-ups"]  
+    assert names == ["Jumping jacks", "Reverse snow angels", "Wall push-ups"]
+
+def test_user_4_gets_safe_exercises(conn):
+    result = safe_exercises(conn, 4)
+    names = sorted(name for _id, name in result)
+    assert names == ["Barbell deadlift", "Dumbbell curls", "Dumbbell overhead press", "Push-ups", "Squats"]  
 
 def test_unknown_user_gets_no_exercises(conn):
     assert safe_exercises(conn, 999) == []
