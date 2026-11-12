@@ -246,17 +246,17 @@ JOIN (VALUES
   ('Wide-arm wall push-up',          'none'),
   ('Standing chest press',           'none'),
   ('Kneeling push-up',               'none'),
-  ('Prone Y raise',                  'mat'),
-  ('Prone T raise',                  'mat'),
-  ('Cobra hold',                     'mat'),
-  ('Forearm plank',                  'mat'),
-  ('Side plank',                     'mat'),
-  ('Bird dog crunch',                'mat'),
-  ('Shoulder taps',                  'mat'),
+  ('Prone Y raise',                  'none'),
+  ('Prone T raise',                  'none'),
+  ('Cobra hold',                     'none'),
+  ('Forearm plank',                  'none'),
+  ('Side plank',                     'none'),
+  ('Bird dog crunch',                'none'),
+  ('Shoulder taps',                  'none'),
   ('Shoulder shrugs',                'none'),
   ('Isometric shoulder abduction',  'none'),
   ('Reverse lunges',                 'none'),
-  ('Glute bridge march',             'mat')
+  ('Glute bridge march',             'none')
 ) AS e(name, equipment) ON exercises.exercise = e.name;
 
 INSERT INTO exercise_areas (exercise_id, area)
