@@ -1,6 +1,6 @@
 from datetime import date
 import pytest
-from missed_workout import next_action
+from app.missed_workout import next_action
 
 planned_date = date(2026, 11, 10)
 

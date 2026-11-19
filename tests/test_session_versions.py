@@ -3,9 +3,9 @@ from datetime import date
 
 import pytest
 
-import sessions
-from plan_generator import build_session
-from sessions import (
+from app import sessions
+from app.plan_generator import build_session
+from app.sessions import (
     SessionLockedError,
     get_session,
     list_versions,

@@ -1,4 +1,4 @@
-from db import get_connection
+from app.db import get_connection
 
 def safe_recipes(conn,user_id):
     with conn.cursor() as cur:

@@ -3,9 +3,9 @@ from datetime import date, datetime
 import pytest
 
 
-from exercises import safe_exercises
-from plan_generator import build_full_body_session, build_session
-from sessions import get_session, save_session
+from app.exercises import safe_exercises
+from app.plan_generator import build_full_body_session, build_session
+from app.sessions import get_session, save_session
 
 
 def assert_session_round_trip(conn, user_id, generated_session):

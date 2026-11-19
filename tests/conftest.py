@@ -1,6 +1,7 @@
 import pytest
-from db import get_connection
-from config import SCHEMA_PATH, SEED_PATH, SEED_PATH_2,SEED_EXERCISES_PATH,SEED_AREAS_PATH,SEED_EXERCISES2_PATH,SEED_EXERCISES3_PATH,SEED_EXERCISES4_PATH, SEED_PATH_3,SEED_PATH_4
+from app.db import get_connection
+from app.config import SQL_DIR
+
 
 
 @pytest.fixture
@@ -17,7 +18,7 @@ def conn():
     conn.execute("CREATE SCHEMA public")
 
     # Rebuild tables and load test data
-    for path in (SCHEMA_PATH, SEED_PATH, SEED_PATH_2, SEED_EXERCISES_PATH, SEED_AREAS_PATH, SEED_EXERCISES2_PATH, SEED_EXERCISES3_PATH, SEED_EXERCISES4_PATH, SEED_PATH_3, SEED_PATH_4):
+    for path in  sorted(SQL_DIR.glob("[0-9][0-9]_*.sql")):
         with open(path, "r", encoding="utf-8") as f:
             conn.execute(f.read())
 
