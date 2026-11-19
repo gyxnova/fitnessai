@@ -92,6 +92,14 @@ CREATE TABLE session_exercises (
     PRIMARY KEY (session_id, exercise_id)
 );
 
+CREATE TABLE session_versions (
+    session_id  INTEGER NOT NULL REFERENCES workout_sessions (session_id) ON DELETE CASCADE,
+    version     INTEGER NOT NULL CHECK (version > 0),
+    saved_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+    exercises   JSONB NOT NULL,
+    PRIMARY KEY (session_id, version)
+);
+
 CREATE TABLE recipes (
     recipe_id  INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     dish_name  TEXT NOT NULL,
@@ -108,3 +116,5 @@ CREATE TABLE recipe_allergens (
     allergen   TEXT NOT NULL,
     PRIMARY KEY (recipe_id, allergen)
 );
+
+
