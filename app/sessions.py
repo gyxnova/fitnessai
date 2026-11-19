@@ -2,7 +2,7 @@ from datetime import date, datetime
 
 from psycopg.types.json import Jsonb
 
-from exercises import safe_exercises
+from app.exercises import safe_exercises
 
 
 class SessionLockedError(Exception):

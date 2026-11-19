@@ -1,5 +1,5 @@
 import pytest
-from exercises import safe_exercises
+from app.exercises import safe_exercises
 
 LEVEL_RANK = {"beginner": 1, "intermediate": 2, "advanced": 3}
 

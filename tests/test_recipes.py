@@ -1,4 +1,4 @@
-from recipes import safe_recipes
+from app.recipes import safe_recipes
 
 
 def test_user_1_gets_safe_recipes(conn):

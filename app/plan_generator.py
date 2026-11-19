@@ -1,5 +1,5 @@
-from exercises import safe_exercises
-from db import get_connection
+from app.exercises import safe_exercises
+from app.db import get_connection
 
 
 def _area_candidates(conn, matched_ids, general_ids, area, target_count):

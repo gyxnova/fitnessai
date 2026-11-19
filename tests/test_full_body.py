@@ -2,8 +2,8 @@ from collections import Counter
 
 import pytest
 
-from exercises import safe_exercises
-from plan_generator import build_full_body_session
+from app.exercises import safe_exercises
+from app.plan_generator import build_full_body_session
 
 
 # Protects full-body sessions from exceeding their time or safety limits.

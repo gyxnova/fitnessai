@@ -1,7 +1,7 @@
 import pytest
 
-from exercises import safe_exercises
-from plan_generator import build_session
+from app.exercises import safe_exercises
+from app.plan_generator import build_session
 
 
 # Protects session safety, time, ordering, and messaging invariants across supported inputs.

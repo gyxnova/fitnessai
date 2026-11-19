@@ -1,4 +1,4 @@
-from db import get_connection
+from app.db import get_connection
 
 def safe_exercises(conn, user_id, goal=None):
     with conn.cursor() as cur:
