@@ -1,7 +1,7 @@
 from datetime import date, datetime
 
 import pytest
-from psycopg.errors import ForeignKeyViolation
+
 
 from exercises import safe_exercises
 from plan_generator import build_full_body_session, build_session
@@ -82,7 +82,7 @@ def test_save_session_rejects_invalid_planned_date(conn, planned_date):
 
 
 # Protects atomicity when any exercise insert fails.
-def test_save_session_rolls_back_on_invalid_exercise_id(conn):
+def test_save_session_rejects_unknown_exercise_id(conn):
     valid_exercise_id = safe_exercises(conn, 3)[0][0]
     session = {
         "exercises": [
@@ -98,7 +98,7 @@ def test_save_session_rolls_back_on_invalid_exercise_id(conn):
         "SELECT COUNT(*) FROM session_exercises"
     ).fetchone()[0]
 
-    with pytest.raises(ForeignKeyViolation):
+    with pytest.raises(ValueError):
         save_session(conn, 3, date(2026, 11, 20), session)
 
     sessions_after = conn.execute(
