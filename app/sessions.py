@@ -29,6 +29,22 @@ def _check_safe(conn, user_id, exercise_ids):
         raise ValueError(f"Unsafe exercise IDs: {unsafe_ids}")
 
 
+def _validate_items(exercises):
+    """Validate exercise presence, uniqueness, and planned minutes."""
+    if not exercises:
+        raise ValueError("A session must contain at least one exercise.")
+
+    exercise_ids = [item["exercise_id"] for item in exercises]
+    if len(exercise_ids) != len(set(exercise_ids)):
+        raise ValueError("Exercise IDs must not be repeated.")
+    if any(
+        type(item["planned_minutes"]) is not int
+        or item["planned_minutes"] <= 0
+        for item in exercises
+    ):
+        raise ValueError("planned_minutes must be a positive integer.")
+
+
 def save_session(conn, user_id, planned_date, session):
     """Save a non-empty generated session and return its ID."""
     exercises = session["exercises"]
@@ -37,6 +53,7 @@ def save_session(conn, user_id, planned_date, session):
     if not isinstance(planned_date, date) or isinstance(planned_date, datetime):
         raise ValueError("planned_date must be a datetime.date.")
 
+    _validate_items(exercises)
     _check_safe(
         conn, user_id, [item["exercise_id"] for item in exercises]
     )
@@ -143,18 +160,8 @@ def _apply_session_update(
                     f"Session {session_id} is not editable."
                 )
 
-            if not new_exercises:
-                raise ValueError("A session must contain at least one exercise.")
-
+            _validate_items(new_exercises)
             exercise_ids = [item["exercise_id"] for item in new_exercises]
-            if len(exercise_ids) != len(set(exercise_ids)):
-                raise ValueError("Exercise IDs must not be repeated.")
-            if any(
-                type(item["planned_minutes"]) is not int
-                or item["planned_minutes"] <= 0
-                for item in new_exercises
-            ):
-                raise ValueError("planned_minutes must be a positive integer.")
 
             _check_safe(conn, user_id, exercise_ids)
 

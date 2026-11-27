@@ -69,6 +69,36 @@ def test_save_empty_session_raises_without_inserting(conn):
     assert after == before
 
 
+# Protects pre-insert validation of exercise IDs and planned minutes.
+@pytest.mark.parametrize("invalid_items", ["repeated", 0, True, "5"])
+def test_save_session_rejects_invalid_items_without_inserting(conn, invalid_items):
+    exercise_id = safe_exercises(conn, 3)[0][0]
+    if invalid_items == "repeated":
+        exercises = [
+            {"exercise_id": exercise_id, "planned_minutes": 5},
+            {"exercise_id": exercise_id, "planned_minutes": 10},
+        ]
+    else:
+        exercises = [
+            {"exercise_id": exercise_id, "planned_minutes": invalid_items}
+        ]
+
+    before = conn.execute(
+        "SELECT COUNT(*) FROM workout_sessions"
+    ).fetchone()[0]
+    with pytest.raises(ValueError):
+        save_session(
+            conn,
+            3,
+            date(2026, 11, 20),
+            {"exercises": exercises, "message": None},
+        )
+    after = conn.execute(
+        "SELECT COUNT(*) FROM workout_sessions"
+    ).fetchone()[0]
+    assert after == before
+
+
 # Protects the requirement that planned dates are date-only values.
 @pytest.mark.parametrize(
     "planned_date",
